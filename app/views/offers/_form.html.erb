@@ -27,35 +27,30 @@
     <div class="col-lg-10">
       <%= f.text_field :url, :class => 'form-control' %>
     </div>
-    <%=f.error_span(:url) %>
   </div>
   <div class="form-group">
     <%= f.label :description, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.text_field :description, :class => 'form-control' %>
     </div>
-    <%=f.error_span(:description) %>
   </div>
   <div class="form-group">
     <%= f.label :starts_at, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :starts_at, :class => 'form-control' %>
+      <%= f.date_field :starts_at, :class => 'form-control' %>
     </div>
-    <%=f.error_span(:starts_at) %>
   </div>
   <div class="form-group">
     <%= f.label :ends_at, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :ends_at, :class => 'form-control' %>
+      <%= f.date_field :ends_at, :class => 'form-control' %>
     </div>
-    <%=f.error_span(:ends_at) %>
   </div>
   <div class="form-group">
     <%= f.label :premium, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :premium, :class => 'form-control' %>
+      <%= f.check_box :premium, :class => 'form-control' %>
     </div>
-    <%=f.error_span(:premium) %>
   </div>
 
   <div class="form-group">
@@ -65,5 +60,4 @@
                 offers_path, :class => 'btn btn-default' %>
     </div>
   </div>
-
 <% end %>

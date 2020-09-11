@@ -5,7 +5,6 @@ class Offer < ApplicationRecord
   validates :advertiser_name, uniqueness: true
   validates_length_of :description, :maximum => 500
   validate :url_format
-  validate :valid_states
 
   before_create :set_default_state
   before_save :set_state
@@ -13,21 +12,15 @@ class Offer < ApplicationRecord
   STATES = ["enabled", "disabled"].freeze
 
   private
-  def valid_states
-    unless STATES.include(state)
-      errors.add(:state, :invalid_state)
-    end
-  end
-
   def set_default_state
     self.state = "disabled"
   end
 
   def set_state
     if DateTime.now >= self.starts_at
-      self.status = "enabled"
+      self.state = "enabled"
     elsif DateTime.now <= self.ends_at
-      self.status = "disabled"
+      self.state = "disabled"
     end
   end
 

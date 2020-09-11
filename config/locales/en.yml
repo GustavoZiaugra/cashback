@@ -31,3 +31,12 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    errors:
+      models:
+        offer:
+          attributes:
+            url:
+              invalid_format: "Invalid Format"
+            state:
+              invalid_state: "Invalid State"

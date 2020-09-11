@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  resources :offers
 
-  root :to => 'offers#index'
+  namespace 'admin' do
+    resources :offers
+    post '/offers/:id/change_state', to: 'offers#change_state', as: 'update_offer_state'
+  end
 
-  post '/offers/:id/change_state', to: 'offers#change_state', as: 'update_offer_state'
+  root :to => 'admin/offers#index'
 end

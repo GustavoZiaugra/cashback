@@ -1,4 +1,4 @@
-class OffersController < ApplicationController
+class Admin::OffersController < ApplicationController
   before_action :set_offer, only: [:show, :edit, :update, :destroy, :change_state]
 
   # GET /offers
@@ -8,7 +8,6 @@ class OffersController < ApplicationController
   end
 
   # GET /offers/1
-  # GET /offers/1.json
   def show
   end
 
@@ -22,41 +21,33 @@ class OffersController < ApplicationController
   end
 
   # POST /offers
-  # POST /offers.json
   def create
     @offer = Offer.new(offer_params)
     respond_to do |format|
       if @offer.save
-        format.html { redirect_to @offer, notice: 'Offer was successfully created.' }
-        format.json { render :show, status: :created, location: @offer }
+        format.html { redirect_to admin_offers_path, notice: 'Offer was successfully created.' }
       else
         format.html { render :new }
-        format.json { render json: @offer.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # PATCH/PUT /offers/1
-  # PATCH/PUT /offers/1.json
   def update
     respond_to do |format|
       if @offer.update(offer_params)
-        format.html { redirect_to @offer, notice: 'Offer was successfully updated.' }
-        format.json { render :show, status: :ok, location: @offer }
+        format.html { redirect_to admin_offers_path, notice: 'Offer was successfully updated.' }
       else
         format.html { render :edit }
-        format.json { render json: @offer.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # DELETE /offers/1
-  # DELETE /offers/1.json
   def destroy
     @offer.destroy
     respond_to do |format|
-      format.html { redirect_to offers_url, notice: 'Offer was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to admin_offers_path, notice: 'Offer was successfully destroyed.' }
     end
   end
 
@@ -67,8 +58,7 @@ class OffersController < ApplicationController
       @offer.update_column(:state, "enabled")
     end
     respond_to do |format|
-      format.html { redirect_to offers_url, notice: 'Offer State was successfully updated.' }
-      format.json { head :no_content }
+      format.html { redirect_to admin_offers_path, notice: 'Offer State was successfully updated.' }
     end
   end
 

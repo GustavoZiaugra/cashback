@@ -2,5 +2,6 @@ Rails.application.routes.draw do
   resources :offers
 
   root :to => 'offers#index'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  post '/offers/:id/change_state', to: 'offers#change_state', as: 'update_offer_state'
 end

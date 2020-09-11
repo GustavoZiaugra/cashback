@@ -1,5 +1,5 @@
 class OffersController < ApplicationController
-  before_action :set_offer, only: [:show, :edit, :update, :destroy]
+  before_action :set_offer, only: [:show, :edit, :update, :destroy, :change_state]
 
   # GET /offers
   # GET /offers.json
@@ -60,6 +60,18 @@ class OffersController < ApplicationController
     end
   end
 
+  def change_state
+    if @offer.state == "enabled"
+      @offer.update_column(:state,"disabled")
+    else
+      @offer.update_column(:state, "enabled")
+    end
+    respond_to do |format|
+      format.html { redirect_to offers_url, notice: 'Offer State was successfully updated.' }
+      format.json { head :no_content }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_offer
@@ -68,6 +80,6 @@ class OffersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def offer_params
-      params.require(:offer).permit(:advertiser_name, :url, :description, :starts_at, :ends_at, :premium)
+      params.require(:offer).permit(:advertiser_name, :url, :description, :starts_at, :ends_at, :premium, :state)
     end
 end

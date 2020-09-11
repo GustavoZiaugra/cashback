@@ -12,6 +12,7 @@
       <th><%= model_class.human_attribute_name(:starts_at) %></th>
       <th><%= model_class.human_attribute_name(:ends_at) %></th>
       <th><%= model_class.human_attribute_name(:premium) %></th>
+      <th><%= model_class.human_attribute_name(:state) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -26,10 +27,20 @@
         <td><%= offer.starts_at %></td>
         <td><%= offer.ends_at %></td>
         <td><%= offer.premium %></td>
+        <td><%= offer.state %></td>
         <td><%=l offer.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_offer_path(offer), :class => 'btn btn-default btn-xs' %>
+            edit_offer_path(offer), :class => 'btn btn-default btn-xs' %>
+
+          <% if offer.state == "disabled" %>
+            <%= link_to t('.enable', :default => t("helpers.links.enable")),
+              update_offer_state_path(offer), method: :post, :class => 'btn btn-default btn-xs' %>
+          <% else %>
+            <%= link_to t('.disable', :default => t("helpers.links.disable")),
+              update_offer_state_path(offer), method: :post, :class => 'btn btn-default btn-xs' %>
+          <% end %>
+
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       offer_path(offer),
                       :method => :delete,

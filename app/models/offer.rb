@@ -9,8 +9,6 @@ class Offer < ApplicationRecord
   before_create :set_default_state
   before_save :set_state
 
-  STATES = ["enabled", "disabled"].freeze
-
   private
   def set_default_state
     self.state = "disabled"
@@ -21,6 +19,8 @@ class Offer < ApplicationRecord
       self.state = "enabled"
     elsif DateTime.now <= self.ends_at
       self.state = "disabled"
+    elsif self.ends_at.blank?
+      self.state
     end
   end
 

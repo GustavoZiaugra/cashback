@@ -20,7 +20,7 @@ class Offer < ApplicationRecord
     elsif DateTime.now <= self.ends_at
       self.state = "disabled"
     elsif self.ends_at.blank?
-      self.state
+      self.state = "enabled"
     end
   end
 

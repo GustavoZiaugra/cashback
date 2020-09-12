@@ -4,7 +4,7 @@ class Admin::OffersController < ApplicationController
   # GET /offers
   # GET /offers.json
   def index
-    @offers = Offer.all
+    @offers = Offer.order(:created_at).all
   end
 
   # GET /offers/1
@@ -53,12 +53,21 @@ class Admin::OffersController < ApplicationController
 
   def change_state
     if @offer.state == "enabled"
-      @offer.update_column(:state,"disabled")
+      respond_to do |format|
+        if @offer.update_column(:state, "disabled")
+          format.html { redirect_to admin_offers_path, notice: 'Offer State was successfully updated.' }
+        else
+          format.html { redirect_to admin_offers_path, notice: 'Offer State cannot be updated.' }
+        end
+      end
     else
-      @offer.update_column(:state, "enabled")
-    end
-    respond_to do |format|
-      format.html { redirect_to admin_offers_path, notice: 'Offer State was successfully updated.' }
+      @offer.state = "enabled"
+      respond_to do |format|
+        if @offer.save!
+          notice = @offer.state == "disabled" ? "Offer State cannot be updated because of some validation rule." : "Offer State updated with success"
+          format.html { redirect_to admin_offers_path, notice: notice }
+        end
+      end
     end
   end
 

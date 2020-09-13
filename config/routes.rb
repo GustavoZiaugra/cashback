@@ -1,5 +1,6 @@
-Rails.application.routes.draw do
+# frozen_string_literal: true
 
+Rails.application.routes.draw do
   namespace 'admin' do
     resources :offers
     post '/offers/:id/change_state', to: 'offers#change_state', as: 'update_offer_state'
@@ -9,5 +10,5 @@ Rails.application.routes.draw do
     resources :offers, only: [:index]
   end
 
-  root :to => 'admin/offers#index'
+  root to: 'admin/offers#index'
 end

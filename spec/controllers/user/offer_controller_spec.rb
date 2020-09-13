@@ -1,10 +1,7 @@
-
 require 'rails_helper'
 
 RSpec.describe User::OffersController, type: :controller do
   context "Endpoints" do
-    let(:offer)  { create(:offer) }
-
     describe "GET index" do
       it "returns 200 with index" do
         get :index

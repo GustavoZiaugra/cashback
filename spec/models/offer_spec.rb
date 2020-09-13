@@ -9,29 +9,68 @@ RSpec.describe Offer, type: :model do
     it { should validate_length_of(:description) }
   end
 
-  describe "custom validations" do
-    it "should set default state before create" do
-      offer = Offer.new(advertiser_name: "Wallmart", url: "https://www.uol.com.br/",
-                        description: "foobar", starts_at: DateTime.now, ends_at: DateTime.now, premium: false)
+  context "custom validations" do
+    let(:offer) { create(:offer) }
 
-      offer.save
-      assert offer.state == "disabled"
+    describe "set_default_state" do
+      it "should set default state before create" do
+        offer = Offer.new(advertiser_name: "Wallmart", url: "https://www.uol.com.br/",
+                          description: "foobar", starts_at: DateTime.now, ends_at: DateTime.now, premium: false)
+
+        offer.save
+        assert offer.state == "disabled"
+      end
     end
 
-    it "should set state before save" do
-      offer = Offer.new(advertiser_name: "Wallmart", url: "https://www.uol.com.br/",
-                        description: "foobar", starts_at: DateTime.now - 1.hour, ends_at: DateTime.now, premium: false, state: "enabled")
+    describe "url_format" do
+      it "should invalidates the url_format" do
+        offer = Offer.new(advertiser_name: "Wallmart", url: "www.uol.com.br",
+                          description: "foobar", starts_at: DateTime.now, ends_at: DateTime.now, premium: false)
 
-      offer.save
-      assert offer.state == "disabled"
+
+        assert offer.valid? == false
+      end
+
+      it "should validates the url_format" do
+        offer = Offer.new(advertiser_name: "Wallmart", url: "https://www.uol.com.br",
+                          description: "foobar", starts_at: DateTime.now, ends_at: DateTime.now, premium: false)
+
+
+        assert offer.valid? == true
+      end
     end
 
-    it "should validates the url_format" do
-      offer = Offer.new(advertiser_name: "Wallmart", url: "www.uol.com.br",
-                        description: "foobar", starts_at: DateTime.now, ends_at: DateTime.now, premium: false)
+    describe "set_state" do
+      it "should set state before save" do
+        offer = Offer.new(advertiser_name: "Wallmart", url: "https://www.uol.com.br/",
+                          description: "foobar", starts_at: DateTime.now - 1.hour, ends_at: DateTime.now, premium: false, state: "enabled")
 
+        offer.save
+        assert offer.state == "disabled"
+      end
 
-      assert offer.valid? == false
+      it "should change state to enabled when Datetime.now >= offer.starts_at" do
+        offer.description = "foobar"
+        offer.save
+
+        assert offer.state == "enabled"
+      end
+
+      it "should change state to disabled when Datetime.now <= offer.starts_at" do
+        offer.update_column(:starts_at, DateTime.now + 3.days)
+        offer.description = "foobar"
+        offer.save
+
+        assert offer.state == "disabled"
+      end
+
+      it "should keep state as enable when offer.ends_at is blank" do
+        offer.update_column(:ends_at, nil)
+        offer.description = "foobar"
+        offer.save
+
+        assert offer.state == "enabled"
+      end
     end
   end
 end

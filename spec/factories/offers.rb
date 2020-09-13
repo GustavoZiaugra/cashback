@@ -4,7 +4,7 @@ FactoryBot.define do
     advertiser_name          { "Wallmart" }
     url                      { "https://www.uol.com.br" }
     description              { "foobar" }
-    starts_at                { DateTime.now }
+    starts_at                { DateTime.now - 1.day}
     ends_at                  { DateTime.now }
     premium                  { false }
   end

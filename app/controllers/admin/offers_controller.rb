@@ -2,7 +2,6 @@ class Admin::OffersController < ApplicationController
   before_action :set_offer, only: [:show, :edit, :update, :destroy, :change_state]
 
   # GET /offers
-  # GET /offers.json
   def index
     @offers = Offer.order(:created_at).all
   end
@@ -51,6 +50,7 @@ class Admin::OffersController < ApplicationController
     end
   end
 
+  # POST /offers/1/change_state
   def change_state
     if @offer.state == "enabled"
       respond_to do |format|

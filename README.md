@@ -20,10 +20,13 @@ All tests were made using RSpec
 bundle exec rspec
 ```
 
+## Application URL
+https://cashback-ruby.herokuapp.com/
+
 ## Functionalities
 
 | Path | Description |
 | ------ | ----------- |
 | /   | Redirect to admin offers index  |
-| /user/offers | Show all open to User Offers  |
-| /admin/offers | Show Admin Offers Operations  |
+| /user/offers | Show all User Offers  |
+| /admin/offers | Show all Admin Offers Operations  |

@@ -34,7 +34,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'bootstrap-sass'
 
-gem 'twitter-bootstrap-rails', '>= 3.2.0', '< 3.2.2'
+gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

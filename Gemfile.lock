@@ -1,3 +1,13 @@
+GIT
+  remote: git://github.com/seyhunak/twitter-bootstrap-rails.git
+  revision: a9a5b41735cdb37e0dcb878eb25dcdf6174412cd
+  specs:
+    twitter-bootstrap-rails (4.0.0)
+      actionpack (>= 5.0, < 7.0)
+      execjs (~> 2.7)
+      less-rails (>= 3.0, < 5.0)
+      railties (>= 5.0, < 7.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -93,10 +103,10 @@ GEM
       thor (>= 0.14, < 2.0)
     less (2.6.0)
       commonjs (~> 0.2.7)
-    less-rails (5.0.0)
-      actionpack (>= 5.0)
+    less-rails (4.0.0)
+      actionpack (>= 4)
       less (~> 2.6.0)
-      sprockets (~> 3.0)
+      sprockets (>= 2)
     listen (3.2.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -230,12 +240,6 @@ GEM
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
-    twitter-bootstrap-rails (3.2.1.rc1)
-      actionpack (>= 3.1)
-      execjs (>= 2.2.2, >= 2.2)
-      less-rails (>= 2.5.0)
-      rails (>= 3.1)
-      railties (>= 3.1)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
     unicode-display_width (1.7.0)
@@ -277,7 +281,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
-  twitter-bootstrap-rails (>= 3.2.0, < 3.2.2)
+  twitter-bootstrap-rails!
   tzinfo-data
   web-console (>= 3.3.0)
   webpacker (~> 4.0)

@@ -1,24 +1,29 @@
-# README
+## Installation
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+You will need:
+* Ruby 2.7.1
+* PostgreSQL 12
+* Ruby on Rails 6.0.3.3
 
-Things you may want to cover:
+Then run this following commands:
+```bash
+bundle install
+bundle exec rails db:create db:migrate
+bundle exec rails server
+```
 
-* Ruby version
 
-* System dependencies
+## Specs
+All tests were made using RSpec
 
-* Configuration
+```bash
+bundle exec rspec
+```
 
-* Database creation
+## Functionalities
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+| Path | Description |
+| ------ | ----------- |
+| /   | Redirect to admin offers index  |
+| /user/offers | Show all open to User Offers  |
+| /admin/offers | Show Admin Offers Operations  |
